@@ -5,3 +5,4 @@ if (!isset($_SESSION['user'])) {
     exit();
 }
 echo "Hola, " . $_SESSION['user'] . " <a href='logout.php'>Cerrar sesión</a>";
+?>
