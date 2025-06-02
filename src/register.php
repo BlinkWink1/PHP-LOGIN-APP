@@ -1,12 +1,19 @@
 <?php
-$mysqli = new mysqli("db", "user", "userpass456", "usersdb");
+
+$db_host = 'db';
+$db_user = getenv('DB_USER');
+$db_password = getenv('DB_PASSWORD');
+$db_name = getenv('DB_NAME');
+
+$mysqli = new mysqli($db_host, $db_user, $db_password, $db_name);
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  $user = $_POST['username'];
-  $pass = password_hash($_POST['password'], PASSWORD_DEFAULT);
-  $stmt = $mysqli->prepare("INSERT INTO users (username, password) VALUES (?, ?)");
-  $stmt->bind_param("ss", $user, $pass);
-  $stmt->execute();
-  header("Location: login.php");
+    $user = $_POST['username'];
+    $pass = password_hash($_POST['password'], PASSWORD_DEFAULT);
+    $stmt = $mysqli->prepare("INSERT INTO users (username, password) VALUES (?, ?)");
+    $stmt->bind_param("ss", $user, $pass);
+    $stmt->execute();
+    header("Location: login.php");
 }
 ?>
 <!DOCTYPE html>
