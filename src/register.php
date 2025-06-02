@@ -1,11 +1,11 @@
 <?php
+// Leo credenciales de .env
+$dbHost     = getenv('DB_HOST');
+$dbUser     = getenv('DB_USER');
+$dbPassword = getenv('DB_PASSWORD');
+$dbName     = getenv('DB_NAME');
 
-$db_host = 'db';
-$db_user = getenv('DB_USER');
-$db_password = getenv('DB_PASSWORD');
-$db_name = getenv('DB_NAME');
-
-$mysqli = new mysqli($db_host, $db_user, $db_password, $db_name);
+$mysqli = new mysqli($dbHost, $dbUser, $dbPassword, $dbName);
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $user = $_POST['username'];
@@ -14,15 +14,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->bind_param("ss", $user, $pass);
     $stmt->execute();
     header("Location: login.php");
+    exit();
 }
 ?>
 <!DOCTYPE html>
 <html>
 <head><title>Registro</title><link rel="stylesheet" href="style.css"></head>
-<body><div class="container">
-<h1>Registro</h1>
-<form method="post">
-<input type="text" name="username" placeholder="Usuario" required>
-<input type="password" name="password" placeholder="Contraseña" required>
-<button type="submit">Registrarse</button>
-</form></div></body></html>
+<body>
+  <div class="container">
+    <h1>Registro</h1>
+    <form method="post">
+      <input type="text" name="username" placeholder="Usuario" required>
+      <input type="password" name="password" placeholder="Contraseña" required>
+      <button type="submit">Registrarse</button>
+    </form>
+  </div>
+</body>
+</html>
