@@ -7,7 +7,7 @@
 </head>
 <body>
 <div class="container">
-  <h1>PROYECTO TFG ZAKARIA CHIOULOUD</h1>
+  <h1>PROYECTO TFC ZAKARIA CHIOULOUD</h1>
   <?php if (isset($_SESSION['username'])): ?>
     <p>Hola, <b><?= $_SESSION['username'] ?></b></p>
     <a href="logout.php"><button>Cerrar sesión</button></a>
