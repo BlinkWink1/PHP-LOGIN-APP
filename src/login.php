@@ -1,23 +1,37 @@
 <?php
 session_start();
 
-$db_host = 'db';
+// Coge las variables de entorno inyectadas por Docker
+$db_host = 'db'; // El nombre del servicio DB en Docker Compose
 $db_user = getenv('DB_USER');
 $db_password = getenv('DB_PASSWORD');
 $db_name = getenv('DB_NAME');
 
+// Asegúrate de que la conexión a la base de datos es exitosa
 $mysqli = new mysqli($db_host, $db_user, $db_password, $db_name);
+
+if ($mysqli->connect_error) {
+    die('Error de Conexión (' . $mysqli->connect_errno . ') ' . $mysqli->connect_error . ' (desde login.php)');
+}
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $user = $_POST['username'];
     $pass = $_POST['password'];
+
     $res = $mysqli->prepare("SELECT password FROM users WHERE username = ?");
     $res->bind_param("s", $user);
     $res->execute();
     $res->bind_result($hash);
+
     if ($res->fetch() && password_verify($pass, $hash)) {
+
         $_SESSION['username'] = $user;
+        
         header("Location: index.php");
+        exit();
+    } else {
+      
+        echo "<p style='color:red;'>Usuario o contraseña incorrectos.</p>";
     }
 }
 ?>
