@@ -1,17 +1,24 @@
 <?php
 session_start();
-$mysqli = new mysqli("db", "user", "userpass456", "usersdb");
+
+$db_host = 'db';
+$db_user = getenv('DB_USER');
+$db_password = getenv('DB_PASSWORD');
+$db_name = getenv('DB_NAME');
+
+$mysqli = new mysqli($db_host, $db_user, $db_password, $db_name);
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  $user = $_POST['username'];
-  $pass = $_POST['password'];
-  $res = $mysqli->prepare("SELECT password FROM users WHERE username = ?");
-  $res->bind_param("s", $user);
-  $res->execute();
-  $res->bind_result($hash);
-  if ($res->fetch() && password_verify($pass, $hash)) {
-    $_SESSION['username'] = $user;
-    header("Location: index.php");
-  }
+    $user = $_POST['username'];
+    $pass = $_POST['password'];
+    $res = $mysqli->prepare("SELECT password FROM users WHERE username = ?");
+    $res->bind_param("s", $user);
+    $res->execute();
+    $res->bind_result($hash);
+    if ($res->fetch() && password_verify($pass, $hash)) {
+        $_SESSION['username'] = $user;
+        header("Location: index.php");
+    }
 }
 ?>
 <!DOCTYPE html>
