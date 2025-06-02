@@ -1,5 +1,5 @@
 <?php
-$mysqli = new mysqli("db", "user", "userpass", "usersdb");
+$mysqli = new mysqli("db", "user", "userpass456", "usersdb");
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $user = $_POST['username'];
   $pass = password_hash($_POST['password'], PASSWORD_DEFAULT);

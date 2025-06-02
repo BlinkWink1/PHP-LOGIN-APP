@@ -1,6 +1,6 @@
 <?php
 session_start();
-$mysqli = new mysqli("db", "user", "userpass", "usersdb");
+$mysqli = new mysqli("db", "user", "userpass456", "usersdb");
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $user = $_POST['username'];
   $pass = $_POST['password'];

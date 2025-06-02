@@ -8,10 +8,8 @@ services:
     volumes:
       - ./src:/var/www/html
     restart: unless-stopped
-    depends_on:
-      - db
     env_file:
-      - .gitignore/.env
+      - .env
     environment:
       - DB_HOST=db
       - DB_USER=${DB_USER}
@@ -28,9 +26,8 @@ services:
 
   db:
     image: mariadb:11.4
-    restart: unless-stopped
     env_file:
-      - .gitignore/.env
+      - .env
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_DATABASE: ${DB_NAME}
