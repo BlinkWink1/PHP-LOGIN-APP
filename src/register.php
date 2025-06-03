@@ -1,5 +1,4 @@
 <?php
-// Leo credenciales de .env
 $dbHost     = getenv('DB_HOST');
 $dbUser     = getenv('DB_USER');
 $dbPassword = getenv('DB_PASSWORD');
