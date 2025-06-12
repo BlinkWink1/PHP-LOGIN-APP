@@ -4,9 +4,10 @@ services:
   web:
     build: .
     ports:
-      - "8080:80"
+      - "8081:80"
     volumes:
       - ./src:/var/www/html
+      - ./auditoria/logs-apache:/var/log/apache2
     restart: unless-stopped
     env_file:
       - .env

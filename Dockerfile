@@ -11,6 +11,4 @@ RUN groupadd -r appgroup && useradd -r -g appgroup appuser
 
 RUN chown -R appuser:appgroup /var/www/html
 
-USER appuser
-
 EXPOSE 80
